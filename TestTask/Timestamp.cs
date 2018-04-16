@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestTask
 {
-    class Timestamp
+    public class Timestamp
     {
         private string strValue;
         private Int32 unix;

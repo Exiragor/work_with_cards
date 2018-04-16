@@ -99,5 +99,11 @@ namespace TestTask
                     button5.Text = dialog.SelectedPath;
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            XMLDocument xml = new XMLDocument();
+            xml.Generate();
+        }
     }
 }

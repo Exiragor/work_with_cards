@@ -58,6 +58,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -346,6 +347,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button6);
             this.tabPage4.Controls.Add(this.button5);
             this.tabPage4.Controls.Add(this.dateTimePicker3);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -364,13 +366,23 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(406, 212);
+            this.button5.Location = new System.Drawing.Point(397, 187);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(124, 41);
+            this.button5.Size = new System.Drawing.Size(152, 41);
             this.button5.TabIndex = 1;
-            this.button5.Text = "Выгрузить в xml";
+            this.button5.Text = "Выбрать директорию";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(413, 282);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(115, 33);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "Выгрузить в xml";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 
@@ -424,6 +436,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Button button6;
     }
 }
 
