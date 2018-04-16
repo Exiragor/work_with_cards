@@ -107,6 +107,9 @@ namespace TestTask
         public static int RealizeCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
+            Timestamp time = new Timestamp();
+            time.SetTime();
+            time.SetUnix();
             int count = 0;
 
             var cards = validateTextBox(textbox);
@@ -121,6 +124,8 @@ namespace TestTask
                 if (result == null) continue;
 
                 result.Status_realized = true;
+                result.Realized_at = time.StrValue;
+                result.Realized_at_unix = time.Unix;
                 count++;
             }
 
