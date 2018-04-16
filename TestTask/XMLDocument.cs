@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace TestTask
 {
     class XMLDocument
-    {
+    { 
        public void Generate()
        {
             XDocument xdoc = new XDocument(new XDeclaration("1.0", "windows-1251", ""));
