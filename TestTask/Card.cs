@@ -12,15 +12,17 @@ namespace TestTask
 {
     public class Card
     {
-        private int code;
+        private string code;
         private int _value;
         private bool status_realized;
-        private string date_create;
-        private string date_realized;
+        private string created_at;
+        private string realized_at;
+        private Int32 created_at_unix;
+        private Int32 realized_at_unix;
 
         public int Id { get; set; }
 
-        public int Code
+        public string Code
         {
             get { return code; }
             set { code = value; }
@@ -38,98 +40,97 @@ namespace TestTask
             set { status_realized = value; }
         }
 
-        public string Date_create
+        public string Created_at
         {
-            get { return date_create; }
-            set { date_create = value; }
+            get { return created_at; }
+            set { created_at = value; }
         }
 
-        public string Date_realized
+        public string Realized_at
         {
-            get { return date_realized; }
-            set { date_realized = value; }
+            get { return realized_at; }
+            set { realized_at = value; }
         }
 
-        public static int setCards(string textbox, int value)
+        public Int32 Created_at_unix
+        {
+            get { return created_at_unix; }
+            set { created_at_unix = value; }
+        }
+
+        public Int32 Realized_at_unix
+        {
+            get { return realized_at_unix; }
+            set { realized_at_unix = value; }
+        }
+
+        public static int SetCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
-
-            string[] sep = { "\n" };
             int count = 0;
-            string[] rows = textbox.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-            var regex = @"\b\d{4}\b";
 
-            DateTime localDate = DateTime.Now;
-            Card card = new Card();
-            card.Value = value;
-            card.Date_create = localDate.ToString();
+            Timestamp time = new Timestamp();
+            time.SetTime();
+            time.SetUnix();
 
-            foreach (var row in rows)
+            var cards = validateTextBox(textbox);
+
+            foreach (var card in cards)
             {
-                var match = Regex.Match(row, regex, RegexOptions.IgnoreCase);
-
-                if (match.Success)
-                {
-                    card.Code = Int32.Parse(row);
-                    if (db.Cards
+                if (db.Cards
                         .Where(c => c.Code == card.Code)
                         .Where(c => c.Value == value)
                         .FirstOrDefault() != null)
-                        continue;
+                    continue;
 
-                    db.Cards.Add(card);
-                    try
-                    {
-                        db.SaveChanges();
-                        count++;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                }
+                card.Created_at = time.StrValue;
+                card.Created_at_unix = time.Unix;
+                card.Value = value;
+
+                db.Cards.Add(card);
+                count++;
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return count;
-            
         }
 
-        public static int realizeCards(string textbox, int value)
+
+        public static int RealizeCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
-
-            string[] sep = { "\n" };
             int count = 0;
-            string[] rows = textbox.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-            var regex = @"\b\d{4}\b";
 
-            Card card = new Card();
+            var cards = validateTextBox(textbox);
 
-            foreach (var row in rows)
+            foreach (var card in cards)
             {
-                var match = Regex.Match(row, regex, RegexOptions.IgnoreCase);
-
-                if (match.Success)
-                {
-                    card.Code = Int32.Parse(row);
-                    var result = db.Cards
+                var result = db.Cards
                         .Where(c => c.Code == card.Code)
                         .Where(c => c.Value == value)
                         .FirstOrDefault();
 
-                    if (result == null) continue;
+                if (result == null) continue;
 
-                    result.Status_realized = true;
-                    try
-                    {
-                        db.SaveChanges();
-                        count++;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                }
+                result.Status_realized = true;
+                count++;
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return count;
@@ -144,6 +145,40 @@ namespace TestTask
                 .Where(c => c.Status_realized == realized)
                 .OrderBy(c => c.Value)
                 .ToArray();
+        }
+
+        public static Card[] getCards(bool realized, Int32 intervalFrom, Int32 intervalTo)
+        {
+            DatabaseContext db = Database.GetContext();
+
+
+            return db.Cards
+                .Where(c => c.Status_realized == realized)
+                //.Where(c => c.Date_create >= intervalFrom)
+                //.Where(c => c.Date_create <= intervalTo)
+                .OrderBy(c => c.Value)
+                .ToArray();
+        }
+
+        private static List<Card> validateTextBox(string textbox)
+        {
+            string[] sep = { "\n" };
+            string[] rows = textbox.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            var regex = @"\b\d{4}\b";
+            List<Card> cards = new List<Card>();
+
+            foreach (var row in rows)
+            {
+                var match = Regex.Match(row, regex, RegexOptions.IgnoreCase);
+                if (match.Success)
+                {
+                    Card card = new Card();
+                    card.Code = row;
+                    cards.Add(card);
+                }
+            }
+
+            return cards;
         }
     }
 }

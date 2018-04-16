@@ -29,9 +29,9 @@ namespace TestTask
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int c1r = Card.setCards(richTextBox1.Text, 1000);
-            int c2r = Card.setCards(richTextBox2.Text, 3000);
-            int c3r = Card.setCards(richTextBox3.Text, 5000);
+            int c1r = Card.SetCards(richTextBox1.Text, 1000);
+            int c2r = Card.SetCards(richTextBox2.Text, 3000);
+            int c3r = Card.SetCards(richTextBox3.Text, 5000);
 
             label5.Text = (c1r + c2r + c3r).ToString();
         }
@@ -43,9 +43,9 @@ namespace TestTask
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int c1r = Card.realizeCards(richTextBox4.Text, 5000);
-            int c2r = Card.realizeCards(richTextBox5.Text, 3000);
-            int c3r = Card.realizeCards(richTextBox6.Text, 1000);
+            int c1r = Card.RealizeCards(richTextBox4.Text, 5000);
+            int c2r = Card.RealizeCards(richTextBox5.Text, 3000);
+            int c3r = Card.RealizeCards(richTextBox6.Text, 1000);
 
             label6.Text = (c1r + c2r + c3r).ToString();
         }
