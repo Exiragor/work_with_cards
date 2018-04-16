@@ -73,7 +73,7 @@ namespace TestTask
             time.SetTime();
             time.SetUnix();
 
-            var cards = validateTextBox(textbox);
+            List<Card> cards = validateTextBox(textbox);
 
             foreach (var card in cards)
             {
@@ -142,7 +142,7 @@ namespace TestTask
 
         }
 
-        public static Card[] getCards(bool realized)
+        public static Card[] GetCards(bool realized)
         {
             DatabaseContext db = Database.GetContext();
 
@@ -152,15 +152,14 @@ namespace TestTask
                 .ToArray();
         }
 
-        public static Card[] getCards(bool realized, Int32 intervalFrom, Int32 intervalTo)
+        public static Card[] GetCards(bool realized, Int32 intervalFrom, Int32 intervalTo)
         {
             DatabaseContext db = Database.GetContext();
 
-
             return db.Cards
                 .Where(c => c.Status_realized == realized)
-                //.Where(c => c.Date_create >= intervalFrom)
-                //.Where(c => c.Date_create <= intervalTo)
+                .Where(c => c.Created_at_unix >= intervalFrom)
+                .Where(c => c.Created_at_unix <= intervalTo)
                 .OrderBy(c => c.Value)
                 .ToArray();
         }

@@ -35,7 +35,7 @@ namespace TestTask
 
         public void SetTime()
         {
-            strValue =  DateTime.Now.ToString();
+            strValue =  DateTime.Now.ToString("dd-MM-yyyy");
         }
 
     }

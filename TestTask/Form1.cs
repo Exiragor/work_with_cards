@@ -53,7 +53,13 @@ namespace TestTask
         private void button4_Click(object sender, EventArgs e)
         {
             string result = "";
-            Card[] cards = Card.getCards(false);
+            Timestamp time = new Timestamp();
+            time.SetUnix(dateTimePicker1.Value.ToString());
+            var intervalFrom = time.Unix;
+            time.SetUnix(dateTimePicker2.Value.ToString());
+            var intervalTo = time.Unix;
+
+            Card[] cards = Card.GetCards(false, intervalFrom, intervalTo);
             foreach (var card in cards)
             {
                 result += card.Value + "-" + card.Code + "\n";
@@ -65,7 +71,12 @@ namespace TestTask
         private void button3_Click(object sender, EventArgs e)
         {
             string result = "";
-            Card[] cards = Card.getCards(true);
+            Timestamp time = new Timestamp();
+            time.SetUnix(dateTimePicker1.Value.ToString());
+            var intervalFrom = time.Unix;
+            time.SetUnix(dateTimePicker2.Value.ToString());
+            var intervalTo = time.Unix;
+            Card[] cards = Card.GetCards(true, intervalFrom, intervalTo);
             foreach (var card in cards)
             {
                 result += card.Value + "-" + card.Code + "\n";
@@ -77,6 +88,16 @@ namespace TestTask
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                if (result.ToString() == "OK")
+                    button5.Text = dialog.SelectedPath;
+            }
         }
     }
 }
