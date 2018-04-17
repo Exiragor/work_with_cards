@@ -15,6 +15,10 @@ namespace TestTask
         public Form1()
         {
             InitializeComponent();
+            var now = DateTime.Now;
+            dateTimePicker1.Value = new DateTime(now.Year, now.Month, now.Day, 0, 0, 1);
+            dateTimePicker2.Value = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
+            dateTimePicker3.Value = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
         }
 
         private void btn_setCards_Click(object sender, EventArgs e)
@@ -65,7 +69,7 @@ namespace TestTask
                 result += card.Value + "-" + card.Code + "\n";
             }
 
-            label11.Text = result;
+            richTextBox7.Text = result;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -82,7 +86,7 @@ namespace TestTask
                 result += card.Value + "-" + card.Code + "\n";
             }
 
-            label11.Text = result;
+            richTextBox7.Text = result;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

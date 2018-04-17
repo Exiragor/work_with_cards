@@ -164,6 +164,13 @@ namespace TestTask
                 .ToArray();
         }
 
+        public static Card GetFirst()
+        {
+            DatabaseContext db = Database.GetContext();
+
+            return db.Cards.FirstOrDefault();
+        }
+
         private static List<Card> validateTextBox(string textbox)
         {
             string[] sep = { "\n" };

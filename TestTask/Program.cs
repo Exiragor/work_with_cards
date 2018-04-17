@@ -15,7 +15,7 @@ namespace TestTask
         static void Main()
         {
             Database.ActivateContext();
-            var cards = Card.GetCards(false);
+            var card = Card.GetFirst();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

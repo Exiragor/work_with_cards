@@ -53,12 +53,13 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button4 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -284,10 +285,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.richTextBox7);
+            this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.dateTimePicker2);
             this.tabPage3.Controls.Add(this.dateTimePicker1);
             this.tabPage3.Controls.Add(this.button4);
-            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -299,7 +301,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.dateTimePicker2.Location = new System.Drawing.Point(48, 339);
+            this.dateTimePicker2.Location = new System.Drawing.Point(57, 138);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 4;
@@ -307,7 +309,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(48, 288);
+            this.dateTimePicker1.Location = new System.Drawing.Point(57, 87);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 3;
@@ -316,30 +318,19 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(48, 147);
+            this.button4.Location = new System.Drawing.Point(57, 316);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 49);
+            this.button4.Size = new System.Drawing.Size(200, 49);
             this.button4.TabIndex = 2;
             this.button4.Text = "Оставшиееся карты";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.LightGray;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label11.Location = new System.Drawing.Point(334, 51);
-            this.label11.MinimumSize = new System.Drawing.Size(383, 235);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(383, 235);
-            this.label11.TabIndex = 1;
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(48, 51);
+            this.button3.Location = new System.Drawing.Point(57, 220);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 51);
+            this.button3.Size = new System.Drawing.Size(200, 51);
             this.button3.TabIndex = 0;
             this.button3.Text = "Реализованные карты";
             this.button3.UseVisualStyleBackColor = true;
@@ -357,12 +348,15 @@
             this.tabPage4.Text = "Выгрузка в xml";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker3
+            // button6
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(373, 86);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker3.TabIndex = 0;
+            this.button6.Location = new System.Drawing.Point(413, 282);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(115, 33);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "Выгрузить в xml";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -374,15 +368,29 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // dateTimePicker3
             // 
-            this.button6.Location = new System.Drawing.Point(413, 282);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(115, 33);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Выгрузить в xml";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.dateTimePicker3.Location = new System.Drawing.Point(373, 86);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker3.TabIndex = 0;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(54, 42);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(181, 13);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "Выберите период и нужные карты";
+            // 
+            // richTextBox7
+            // 
+            this.richTextBox7.Location = new System.Drawing.Point(395, 42);
+            this.richTextBox7.Name = "richTextBox7";
+            this.richTextBox7.Size = new System.Drawing.Size(430, 349);
+            this.richTextBox7.TabIndex = 6;
+            this.richTextBox7.Text = "";
             // 
             // Form1
             // 
@@ -429,7 +437,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox richTextBox6;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
@@ -437,6 +444,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.RichTextBox richTextBox7;
+        private System.Windows.Forms.Label label12;
     }
 }
 
