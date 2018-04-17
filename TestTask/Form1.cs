@@ -33,11 +33,15 @@ namespace TestTask
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int c1r = Card.SetCards(richTextBox1.Text, 1000);
-            int c2r = Card.SetCards(richTextBox2.Text, 3000);
-            int c3r = Card.SetCards(richTextBox3.Text, 5000);
+            Count c1r = Card.SetCards(richTextBox1.Text, 1000);
+            Count c2r = Card.SetCards(richTextBox2.Text, 3000);
+            Count c3r = Card.SetCards(richTextBox3.Text, 5000);
 
-            label5.Text = (c1r + c2r + c3r).ToString();
+            int successed = c1r.Successed + c2r.Successed + c3r.Successed;
+            int failed = c1r.Failed + c2r.Failed + c3r.Failed;
+
+            label5.Text = "Успешно выполнено: " + successed + "\n";
+            label5.Text += "Невыполнено из-за ошибки: " + failed;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -47,11 +51,15 @@ namespace TestTask
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int c1r = Card.RealizeCards(richTextBox4.Text, 5000);
-            int c2r = Card.RealizeCards(richTextBox5.Text, 3000);
-            int c3r = Card.RealizeCards(richTextBox6.Text, 1000);
+            Count c1r = Card.RealizeCards(richTextBox4.Text, 5000);
+            Count c2r = Card.RealizeCards(richTextBox5.Text, 3000);
+            Count c3r = Card.RealizeCards(richTextBox6.Text, 1000);
 
-            label6.Text = (c1r + c2r + c3r).ToString();
+            int successed = c1r.Successed + c2r.Successed + c3r.Successed;
+            int failed = c1r.Failed + c2r.Failed + c3r.Failed;
+
+            label6.Text = "Успешно выполнено: " + successed + "\n";
+            label6.Text += "Невыполнено из-за ошибки: " + failed;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -96,18 +104,25 @@ namespace TestTask
 
         private void button5_Click(object sender, EventArgs e)
         {
-            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
-            {
-                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-                if (result.ToString() == "OK")
-                    button5.Text = dialog.SelectedPath;
-            }
+            
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             XMLDocument xml = new XMLDocument();
-            xml.Generate();
+            xml.SetPath();
+
+            var date = dateTimePicker3.Value.ToString("yyyy-MM-dd");
+            xml.DocDate = date;
+
+            Card[] cards = Card.GetCards(true, date);
+            int[] counts = Card.GetCountCards(cards);
+            xml.Generate(counts[0], counts[1], counts[2]);
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

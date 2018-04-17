@@ -19,6 +19,7 @@ namespace TestTask
         private string realized_at;
         private Int32 created_at_unix;
         private Int32 realized_at_unix;
+        private static Count count;
 
         public int Id { get; set; }
 
@@ -64,10 +65,10 @@ namespace TestTask
             set { realized_at_unix = value; }
         }
 
-        public static int SetCards(string textbox, int value)
+        public static Count SetCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
-            int count = 0;
+            count = new Count(0, 0);
 
             Timestamp time = new Timestamp();
             time.SetTime();
@@ -88,7 +89,7 @@ namespace TestTask
                 card.Value = value;
 
                 db.Cards.Add(card);
-                count++;
+                count.SuccessTick();
             }
 
             try
@@ -104,13 +105,13 @@ namespace TestTask
         }
 
 
-        public static int RealizeCards(string textbox, int value)
+        public static Count RealizeCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
             Timestamp time = new Timestamp();
             time.SetTime();
             time.SetUnix();
-            int count = 0;
+            count = new Count(0, 0);
 
             var cards = validateTextBox(textbox);
 
@@ -126,7 +127,8 @@ namespace TestTask
                 result.Status_realized = true;
                 result.Realized_at = time.StrValue;
                 result.Realized_at_unix = time.Unix;
-                count++;
+
+                count.SuccessTick();
             }
 
             try
@@ -152,6 +154,17 @@ namespace TestTask
                 .ToArray();
         }
 
+        public static Card[] GetCards(bool realized, string date)
+        {
+            DatabaseContext db = Database.GetContext();
+
+            return db.Cards
+                .Where(c => c.Status_realized == realized)
+                .Where(c => c.Realized_at == date)
+                .OrderBy(c => c.Value)
+                .ToArray();
+        }
+
         public static Card[] GetCards(bool realized, Int32 intervalFrom, Int32 intervalTo)
         {
             DatabaseContext db = Database.GetContext();
@@ -171,6 +184,29 @@ namespace TestTask
             return db.Cards.FirstOrDefault();
         }
 
+        public static int[] GetCountCards(Card[] cards)
+        {
+            int k1 = 0, k3 = 0, k5 = 0;
+
+            foreach (var card in cards)
+            {
+                if (card.Value == 1000)
+                {
+                    k1++;
+                }
+                else if (card.Value == 3000)
+                {
+                    k3++;
+                }
+                else
+                {
+                    k5++;
+                }
+            }
+
+            return new int[3] { k1, k3, k5 };
+        }
+
         private static List<Card> validateTextBox(string textbox)
         {
             string[] sep = { "\n" };
@@ -180,6 +216,8 @@ namespace TestTask
 
             foreach (var row in rows)
             {
+                count.CommonTick();
+
                 var match = Regex.Match(row, regex, RegexOptions.IgnoreCase);
                 if (match.Success)
                 {
