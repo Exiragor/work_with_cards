@@ -1,10 +1,8 @@
-﻿using MySql.Data.MySqlClient;
-
-namespace TestTask
+﻿namespace TestTask
 {
     class Database
     {
-        private static DatabaseContext db;
+        private static DatabaseContext db; // Контекст для работы с базой
 
         public static void ActivateContext()
         {

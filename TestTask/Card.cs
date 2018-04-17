@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using System.Data.SqlClient;
-using System.Data.Entity.Core;
-using System.Data.Entity.Infrastructure;
 
 namespace TestTask
 {
     public class Card
     {
-        private string code;
-        private int _value;
-        private bool status_realized;
-        private string created_at;
-        private string realized_at;
-        private Int32 created_at_unix;
-        private Int32 realized_at_unix;
-        private static Count count;
+        private string code; //уникальный код карты
+        private int _value; //номинал
+        private bool status_realized; //реализованная ли карта
+        private string created_at; //Дата создания
+        private string realized_at; //Дата реализации
+        private Int32 created_at_unix; //Дата создания в unix
+        private Int32 realized_at_unix; //Дата реализация в unix
+        private static Count count; //Класс для работы с подсчетами
 
         public int Id { get; set; }
 
@@ -65,6 +60,7 @@ namespace TestTask
             set { realized_at_unix = value; }
         }
 
+        // Сохраняем карты из текстбокса по номиналу
         public static Count SetCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
@@ -104,7 +100,7 @@ namespace TestTask
             return count;
         }
 
-
+        // Реализуем карты из текстбокса по номиналу
         public static Count RealizeCards(string textbox, int value)
         {
             DatabaseContext db = Database.GetContext();
@@ -144,6 +140,7 @@ namespace TestTask
 
         }
 
+        // Получаем реализованные или нереализованные карты
         public static Card[] GetCards(bool realized)
         {
             DatabaseContext db = Database.GetContext();
@@ -154,6 +151,7 @@ namespace TestTask
                 .ToArray();
         }
 
+        // Получаем реализованные или нереализованные карты по дате 
         public static Card[] GetCards(bool realized, string date)
         {
             DatabaseContext db = Database.GetContext();
@@ -165,6 +163,7 @@ namespace TestTask
                 .ToArray();
         }
 
+        // Получаем реализованные или нереализованные карты на интервале
         public static Card[] GetCards(bool realized, Int32 intervalFrom, Int32 intervalTo)
         {
             DatabaseContext db = Database.GetContext();
@@ -177,6 +176,7 @@ namespace TestTask
                 .ToArray();
         }
 
+        // Получаем первую карту
         public static Card GetFirst()
         {
             DatabaseContext db = Database.GetContext();
@@ -184,6 +184,7 @@ namespace TestTask
             return db.Cards.FirstOrDefault();
         }
 
+        // Получаем количество реализованных карт, разбитых по номиналу
         public static int[] GetCountCards(Card[] cards)
         {
             int k1 = 0, k3 = 0, k5 = 0;
@@ -207,6 +208,7 @@ namespace TestTask
             return new int[3] { k1, k3, k5 };
         }
 
+        // Отбираем уникальные коды из текстбокса
         private static List<Card> validateTextBox(string textbox)
         {
             string[] sep = { "\n" };

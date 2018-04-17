@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TestTask
@@ -14,8 +11,9 @@ namespace TestTask
         [STAThread]
         static void Main()
         {
-            Database.ActivateContext();
+            Database.ActivateContext(); // Активируем контекст
             var card = Card.GetFirst();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

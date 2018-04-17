@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestTask
 {
     public class Timestamp
     {
-        private string strValue;
-        private Int32 unix;
+        private string strValue; // Дата
+        private Int32 unix; // Дата в unix
 
         public string StrValue
         {

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestTask
+﻿namespace TestTask
 {
     public class Count
     {
-        private int common;
-        private int successed;
+        private int common; // Количество общих
+        private int successed; // Количество успешных
 
         public Count(int common, int successed)
         {

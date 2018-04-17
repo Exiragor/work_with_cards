@@ -137,7 +137,6 @@
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "1000";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // richTextBox3
             // 
@@ -183,7 +182,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(152, 240);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "XXXX\nXXXX";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // tabPage2
             // 
@@ -212,7 +210,6 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 17;
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -336,7 +333,6 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 3;
             this.dateTimePicker1.Value = new System.DateTime(2018, 4, 16, 0, 0, 0, 0);
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // button4
             // 
